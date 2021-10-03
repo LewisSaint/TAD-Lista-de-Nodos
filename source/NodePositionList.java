@@ -1,7 +1,5 @@
 package source;
 
-import org.w3c.dom.Node;
-
 import java.util.Iterator;
 
 public class NodePositionList <E> implements PositionList<E> {
@@ -106,8 +104,23 @@ public class NodePositionList <E> implements PositionList<E> {
     }
 
     public void addAfter(Position<E> p, E e) throws InvalidPositionException {
-
         DNode<E> v = checkPosition(p);
+
+        boolean isInside = false;
+        while (header.getNext() != null) {
+            if (this.header == p) {
+                isInside = true;
+                break;
+            }
+            header = header.getNext();
+        }
+
+        if (!isInside) {
+            throw new InvalidPositionException("Value is not part of the list!");
+        }
+
+
+
         numElts++;
         DNode<E> newNode = new DNode<E>(v, v.getNext(), e);
         v.getNext().setPrev(newNode);
@@ -123,6 +136,25 @@ public class NodePositionList <E> implements PositionList<E> {
 
     public Iterator<E> iterator() { return new ElementIterator<E>(this); }
     public String toString() { return toString(this); }
+
+
+    public void makeFirst(Position<E> p) {
+        DNode<E> v = checkPosition(p);
+
+        DNode<E> newNode = new DNode<E>(header, header.getNext(), v.element());
+        header.getNext().setPrev(newNode);
+        header.setNext(newNode);
+
+        DNode<E> vPrev = v.getPrev();
+        DNode<E> vNext = v.getNext();
+        vPrev.setNext(vNext);
+        vNext.setPrev(vPrev);
+
+        v.setNext(null);
+        v.setPrev(null);
+
+
+    }
 
 
 }

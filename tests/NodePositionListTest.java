@@ -45,4 +45,50 @@ public class NodePositionListTest {
         assertEquals("[8, 2, 7, 5]", l.toString(), "[8, 2, 7, 5]");
     }
 
+
+    @Test
+    void TestMakeFirst() {
+
+        NodePositionList<Integer> l = new NodePositionList<Integer>();
+
+        l.addFirst(9);
+        l.addLast(8);
+        l.addLast(3);
+        l.addLast(5);
+
+        Position<Integer> pos = l.last();
+
+
+        System.out.println(l);
+
+        l.makeFirst(pos);
+        System.out.println(l);
+
+        //assertEquals("[9, 8, 3, 5]", l.toString(), "[3, 9, 8, 5");
+
+
+
+
+
+    }
+
+
+    @Test
+    void testAddAfterTest() {
+        NodePositionList<Integer> l = new NodePositionList<Integer>();
+
+        l.addFirst(9);
+        l.addLast(8);
+        l.addLast(3);
+
+
+        Position<Integer> p1 = l.last();
+        System.out.println(p1);
+        l.addAfter(p1, 2);
+
+        assertEquals("[9,8,3,2]",l.toString());
+
+
+    }
+
 }

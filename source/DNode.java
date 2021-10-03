@@ -5,7 +5,7 @@ public class DNode <E> implements Position<E> {
     private DNode<E> prev, next;
     private E element;
 
-    public  DNode (DNode <E> newPrev, DNode <E> newNext, E elem) {
+    public DNode (DNode <E> newPrev, DNode <E> newNext, E elem) {
 
         prev = newPrev;
         next = newNext;
